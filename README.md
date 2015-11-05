@@ -16,12 +16,12 @@ Build a node server with a database connected REST API for supporting UI prototy
 2. `cd birdREST`
 3. `npm install`
 4. create the database `createdb birds_db`
-5. 'psql birds_db'
-6. '\i sql/create-schema.sql'
-7. '\i sql/load-data.sql'
-8. '\q'
+5. `psql birds_db`
+6. `\i sql/create-schema.sql`
+7. `\i sql/load-data.sql`
+8. `\q`
 
 ## Testing
 
-1. BDD with Yadda - type `mocha`
-2. JSHint and JSCS - type `gulp test`
+1. `mocha` - BDD with Yadda
+2. `gulp test` - JSHint and JSCS
