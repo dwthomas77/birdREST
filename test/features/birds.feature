@@ -7,7 +7,7 @@ Scenario: Add Birds with minimum fields
         ---------------------------------------------------------
         | name_common       | name_scientific       | family_id |
         | Northern Cardinal | Cardinalis cardinalis | 1         |
-        | Field Sparrow2    | Spizella pusilla      | 2         |
+        | Field Sparrow     | Spizella pusilla      | 2         |
         ---------------------------------------------------------
 
     When I request all the Birds
@@ -16,5 +16,5 @@ Scenario: Add Birds with minimum fields
         ---------------------------------------------------------
         | name_common       | name_scientific       | family_id |
         | Northern Cardinal | Cardinalis cardinalis | 1         |
-        | Field Sparrow2    | Spizella pusilla      | 2         |
+        | Field Sparrow     | Spizella pusilla      | 2         |
         ---------------------------------------------------------
