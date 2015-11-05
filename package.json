@@ -1,0 +1,27 @@
+{
+  "name": "bird_rest",
+  "version": "1.0.0",
+  "description": "REST API server with tests",
+  "main": "index.html",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "author": "David W. Thomas",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.0.2",
+    "join-js": "^0.4.0",
+    "knex": "^0.8.6",
+    "lodash": "^3.9.3",
+    "pg": "^4.4.0"
+  },
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "gulp": "^3.9.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^1.12.0",
+    "jshint-stylish": "^2.0.1",
+    "mocha": "^2.3.3",
+    "yadda": "^0.16.0"
+  }
+}
