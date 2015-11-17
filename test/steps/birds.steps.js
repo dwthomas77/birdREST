@@ -19,7 +19,6 @@ module.exports = English.library(dictionary)
         table.forEach( function(bird) {
             tasks.push(birdService.createBird(bird));
         });
-
         Promise.all(tasks)
             .then(function() {
                 next();

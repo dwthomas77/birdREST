@@ -5,16 +5,16 @@ Scenario: Add Birds with minimum fields
 
     Given the following Birds
         ---------------------------------------------------------
-        | name_common       | name_scientific       | family_id |
-        | Northern Cardinal | Cardinalis cardinalis | 1         |
-        | Field Sparrow     | Spizella pusilla      | 2         |
+        | nameCommon        | nameScientific        | family    |
+        | Northern Cardinal | Cardinalis cardinalis | CARD      |
+        | Field Sparrow     | Spizella pusilla      | NWSPROW   |
         ---------------------------------------------------------
 
     When I request all the Birds
 
     Then I should receive the following Birds
         ---------------------------------------------------------
-        | name_common       | name_scientific       | family_id |
-        | Northern Cardinal | Cardinalis cardinalis | 1         |
-        | Field Sparrow     | Spizella pusilla      | 2         |
+        | nameCommon        | nameScientific        | family    |
+        | Northern Cardinal | Cardinalis cardinalis | CARD      |
+        | Field Sparrow     | Spizella pusilla      | NWSPROW   |
         ---------------------------------------------------------

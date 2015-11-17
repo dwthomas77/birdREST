@@ -10,6 +10,9 @@ module.exports = {
 
 var persistence = require('./persistence');
 var birdRepository = persistence.birdRepository;
+var familyService = require('./family.service');
+
+var Promise = require( 'bluebird' );
 
 /**
  * Creates a new person and inserts it in to the database.
@@ -20,12 +23,18 @@ var birdRepository = persistence.birdRepository;
  */
 function createBird(birdReq) {
     var requiredErrorList = [],
+        tasks = [],
+        cleanBirdObj = {
+            name_common: birdReq.nameCommon,
+            name_scientific: birdReq.nameScientific
+        },
         errorMsg = 'Required fields are missing: ',
         requiredFields = [
-            'name_common',
-            'name_scientific'
+            'nameCommon',
+            'nameScientific'
         ];
 
+    // Request Validation
     requiredFields.forEach(function(property) {
         if (!birdReq[property]) {
             requiredErrorList.push(property);
@@ -36,7 +45,14 @@ function createBird(birdReq) {
         throw(errorMsg + requiredErrorList.join(', '));
     }
 
-    return birdRepository.createBird(birdReq);
+    // Get IDs
+    tasks.push(familyService.getFamily(birdReq.family));
+
+    return Promise.all(tasks)
+        .then(function(results) {
+            cleanBirdObj.family_id = results[0].id;
+            return birdRepository.createBird(cleanBirdObj);
+        });
 }
 
 /**

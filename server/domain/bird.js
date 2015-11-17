@@ -9,8 +9,8 @@ var _ = require('lodash');
  * Example:
  *   {
  *      id: 5,
- *      name_common: 'Northern Cardinal',
- *      name_scientific: 'Cardinalis cardinalis',
+ *      nameCommon: 'Northern Cardinal',
+ *      nameScientific: 'Cardinalis cardinalis',
  *      family: 3,
  *      region: 7,
  *      habitat: 12,
@@ -20,8 +20,8 @@ var _ = require('lodash');
  *
  * @class Bird
  * @property {number}   id
- * @property {string}   name_common
- * @property {string}   name_scientific
+ * @property {string}   nameCommon
+ * @property {string}   nameScientific
  * @property {number}   family
  * @property {number}   region
  * @property {number}   habitat
@@ -36,8 +36,8 @@ var Bird = function(birdReq) {
 
 /**
  * @typedef {Object}    BirdReq
- * @property {string}   name_common
- * @property {string}   name_scientific
+ * @property {string}   nameCommon
+ * @property {string}   nameScientific
  * @property {string}   [family]
  * @property {string}   [region]
  * @property {string}   [habitat]

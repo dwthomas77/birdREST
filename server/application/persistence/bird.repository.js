@@ -10,6 +10,8 @@ module.exports = {
 };
 
 var knex = require('./db').knex;
+var joinjs = require('join-js');
+var resultMaps = require('./resultmaps');
 
 /**
  * Gets all Birds
@@ -18,11 +20,17 @@ var knex = require('./db').knex;
  * @return {Promise<Bird[]>} A promise that returns a list of all birds
  */
 function getBirds() {
+
     return knex
-        .select()
-        .from('birds')
-        .then(function(resultSet) {
-            return resultSet;
+        .select(
+            'b.id as bird_id',
+            'b.name_common as bird_nameCommon',
+            'b.name_scientific as bird_nameScientific',
+            'f.uid as bird_family')
+        .from('birds as b')
+        .leftOuterJoin('families as f', 'b.family_id', 'f.id')
+        .then(function(birds) {
+            return joinjs.map(birds, resultMaps, 'birdMap', 'bird_');
         });
 }
 
@@ -35,11 +43,16 @@ function getBirds() {
  */
 function getBirdById(id) {
     return knex
-        .select()
-        .from('birds')
-        .where('id', id)
+        .select(
+            'b.id as bird_id',
+            'b.name_common as bird_nameCommon',
+            'b.name_scientific as bird_nameScientific',
+            'f.uid as bird_family')
+        .from('birds as b')
+        .leftOuterJoin('families as f', 'b.family_id', 'f.id')
+        .where('b.id', id)
         .then(function(bird) {
-            return bird;
+            return joinjs.mapOne(bird, resultMaps, 'birdMap', 'bird_');
         });
 }
 
@@ -58,7 +71,6 @@ function createBird(birdReq) {
             return getBirdById(id[0]);
         })
         .catch(function(err) {
-            console.log('there was an error');
             console.error(err);
         });
 }
