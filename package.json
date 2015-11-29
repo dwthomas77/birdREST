@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.0.2",
+    "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
     "join-js": "^0.4.0",
     "knex": "^0.8.6",
     "lodash": "^3.9.3",

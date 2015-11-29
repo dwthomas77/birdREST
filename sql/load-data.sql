@@ -24,9 +24,9 @@ VALUES ('MDATL', 'Mid Atlantic', 'New York, New Jersey, Pennsylvania.');
 -- families
 -- -----------------------------------------------------------------------------
 INSERT INTO families
-(id, uid, name, description)
-VALUES (1, 'CARD', 'Cardinals', 'Robust, seed-eating birds with strong bills.');
+(uid, name, description)
+VALUES ('CARD', 'Cardinals', 'Robust, seed-eating birds with strong bills.');
 
 INSERT INTO families
-(id, uid, name, description)
-VALUES (2, 'NWSPROW', 'New World Sparrows', 'Small, plump, brown-grey birds with short tails and stubby, powerful beaks.');
+(uid, name, description)
+VALUES ('NWSPROW', 'New World Sparrows', 'Small, plump, brown-grey birds with short tails and stubby, powerful beaks.');
