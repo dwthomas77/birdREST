@@ -9,6 +9,8 @@ Build a node server with a database connected REST API for supporting UI prototy
 
 * PostgreSQL
 * Node.js
+* Gulp global install `npm install -g gulp`
+* Mocha global install `npm install -g mocha`
 
 ## Setup Instructions
 

@@ -4,6 +4,7 @@
 'use strict';
 
 module.exports = {
+    addBirdRegion: addBirdRegion,
     getBirds: getBirds,
     createBird: createBird,
     getBirdById: getBirdById
@@ -12,6 +13,7 @@ module.exports = {
 var knex = require('./db').knex;
 var joinjs = require('join-js');
 var resultMaps = require('./resultmaps');
+var Promise = require( 'bluebird' );
 
 /**
  * Gets all Birds
@@ -26,9 +28,15 @@ function getBirds() {
             'b.id as bird_id',
             'b.name_common as bird_nameCommon',
             'b.name_scientific as bird_nameScientific',
-            'f.uid as bird_family')
+            'f.uid as bird_family',
+            'r.id as region_id',
+            'r.uid as region_uid',
+            'r.name as region_name',
+            'r.description as region_description')
         .from('birds as b')
         .leftOuterJoin('families as f', 'b.family_id', 'f.id')
+        .leftOuterJoin('bird_regions as br', 'b.id', 'br.bird_id')
+        .leftOuterJoin('regions as r', 'br.region_id', 'r.id')
         .then(function(birds) {
             return joinjs.map(birds, resultMaps, 'birdMap', 'bird_');
         });
@@ -47,9 +55,14 @@ function getBirdById(id) {
             'b.id as bird_id',
             'b.name_common as bird_nameCommon',
             'b.name_scientific as bird_nameScientific',
-            'f.uid as bird_family')
+            'f.uid as bird_family',
+            'r.id as region_id',
+            'r.uid as region_uid',
+            'r.description as region_description')
         .from('birds as b')
         .leftOuterJoin('families as f', 'b.family_id', 'f.id')
+        .leftOuterJoin('bird_regions as br', 'b.id', 'br.bird_id')
+        .leftOuterJoin('regions as r', 'br.region_id', 'r.id')
         .where('b.id', id)
         .then(function(bird) {
             return joinjs.mapOne(bird, resultMaps, 'birdMap', 'bird_');
@@ -69,6 +82,30 @@ function createBird(birdReq) {
         .insert(birdReq)
         .then(function(id) {
             return getBirdById(id[0]);
+        })
+        .catch(function(err) {
+            console.error(err);
+        });
+}
+
+/**
+ * Adds a junction betwen a bird and a region
+ *
+ * @static
+ * @param {number} birdId
+ * @param {number} regionId
+ * @return {string} birdRegionId
+ */
+function addBirdRegion(birdId, regionId) {
+    return knex('bird_regions')
+        .returning('bird_region_id')
+        .insert({
+            bird_region_id: birdId + '_' + regionId,
+            bird_id: birdId,
+            region_id: regionId
+        })
+        .then(function(birdRegionId) {
+            return Promise.resolve(birdRegionId);
         })
         .catch(function(err) {
             console.error(err);

@@ -6,5 +6,6 @@ module.exports = {
     knex: db.knex,
     destroyConnectionPool: db.destroyConnectionPool,
     birdRepository: require('./bird.repository'),
-    familyRepository: require('./family.repository')
+    familyRepository: require('./family.repository'),
+    regionRepository: require('./region.repository')
 };

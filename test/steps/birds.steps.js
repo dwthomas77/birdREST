@@ -7,6 +7,7 @@ var dictionary = new Yadda.Dictionary()
     .define('table', /([^\u0000]*)/, Yadda.converters.table);
 
 var Promise = require( 'bluebird' );
+var _ = require('lodash');
 var birdService = require('../../server/application/bird.service');
 
 var birds = [];
@@ -17,6 +18,9 @@ module.exports = English.library(dictionary)
         var tasks = [];
 
         table.forEach( function(bird) {
+            // clean data
+            bird.regions = bird.regions.split(',');
+            // load creation request
             tasks.push(birdService.createBird(bird));
         });
         Promise.all(tasks)
@@ -33,10 +37,15 @@ module.exports = English.library(dictionary)
             });
     })
     .then('I should receive the following Birds\n$table', function(expectedBirds, next) {
-        // remove id for normalized testing
-        birds.forEach(function(bird) {
-            delete bird.id;
+
+        // match each bird successfully
+        expectedBirds.forEach(function(testBird) {
+            var matchedBird = _.findWhere(birds, {nameCommon: testBird.nameCommon});
+            assert.equal(testBird.uid, matchedBird.uid, 'no matching bird was found for ' + testBird.name_common);
+            assert.equal(testBird.family, matchedBird.family, 'family did not match for ' + testBird.name_common);
+            assert.equal(testBird.name_common, matchedBird.name_common,
+                'common name did not match for ' + testBird.name_common);
         });
-        assert.deepEqual(birds, expectedBirds, 'Assert queried birds equal expected birds');
+
         next();
     });

@@ -23,5 +23,7 @@ api.use('/', express.static(__dirname + '/../../public'));
 
 // Add API routes
 require('./bird.resource').addRoutes(api);
+require('./family.resource').addRoutes(api);
+require('./region.resource').addRoutes(api);
 
 module.exports = api;

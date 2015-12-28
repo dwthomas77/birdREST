@@ -1,5 +1,5 @@
 /**
- * @module adapter/BirdResource
+ * @module adapter/FamilyResource
  */
 
 'use strict';
@@ -10,25 +10,25 @@ module.exports = {
 
 // Adds routes to the api.
 function addRoutes(api) {
-    api.post('/birds', createBird);
-    api.get('/birds', getBirds);
+    api.post('/families', createFamily);
+    api.get('/families', getFamilies);
 }
 
-var birdService = require('../../application').birdService;
+var familyService = require('../../application').familyService;
 
 /**
- * Creates a new bird and inserts it in to the database.
+ * Creates a new family and inserts it in to the database.
  *
  * @static
  * @param {Object} req
- * @param {BirdReq} req.body
+ * @param {FamilyReq} req.body
  * @param {Object} res
  */
-function createBird(req, res) {
+function createFamily(req, res) {
 
-    birdService.createBird(req.body)
-        .then(function(bird) {
-            res.send(bird);
+    familyService.createFamily(req.body)
+        .then(function(family) {
+            res.send(family);
         })
         .catch(function(error) {
             console.log(error);
@@ -37,17 +37,17 @@ function createBird(req, res) {
 }
 
 /**
- * Gets all birds
+ * Gets all families
  *
  * @static
  * @param {Object} req
  * @param {Object} res
  */
-function getBirds(req, res) {
+function getFamilies(req, res) {
 
-    birdService.getBirds()
-        .then(function(birds) {
-            res.send(birds);
+    familyService.getFamilies()
+        .then(function(families) {
+            res.send(families);
         })
         .catch(function(error) {
             console.log(error);

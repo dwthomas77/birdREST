@@ -13,6 +13,9 @@ var resultMaps = [
             'nameCommon',
             'nameScientific',
             'family'
+        ],
+        collections: [
+            {name: 'regions', mapId: 'regionMap', columnPrefix:'region_'}
         ]
     },
     {
@@ -20,6 +23,18 @@ var resultMaps = [
         idProperty: 'id',
         createNew: function() {
             return new domain.Family();
+        },
+        properties: [
+            'uid',
+            'name',
+            'description'
+        ]
+    },
+    {
+        mapId: 'regionMap',
+        idProperty: 'id',
+        createNew: function() {
+            return new domain.Region();
         },
         properties: [
             'uid',

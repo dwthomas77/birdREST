@@ -1,5 +1,5 @@
 /**
- * @module adapter/BirdResource
+ * @module adapter/RegionResource
  */
 
 'use strict';
@@ -10,25 +10,25 @@ module.exports = {
 
 // Adds routes to the api.
 function addRoutes(api) {
-    api.post('/birds', createBird);
-    api.get('/birds', getBirds);
+    api.post('/regions', createRegion);
+    api.get('/regions', getRegions);
 }
 
-var birdService = require('../../application').birdService;
+var regionService = require('../../application').regionService;
 
 /**
- * Creates a new bird and inserts it in to the database.
+ * Creates a new region and inserts it in to the database.
  *
  * @static
  * @param {Object} req
- * @param {BirdReq} req.body
+ * @param {RegionReq} req.body
  * @param {Object} res
  */
-function createBird(req, res) {
+function createRegion(req, res) {
 
-    birdService.createBird(req.body)
-        .then(function(bird) {
-            res.send(bird);
+    regionService.createRegion(req.body)
+        .then(function(region) {
+            res.send(region);
         })
         .catch(function(error) {
             console.log(error);
@@ -37,17 +37,17 @@ function createBird(req, res) {
 }
 
 /**
- * Gets all birds
+ * Gets all regions
  *
  * @static
  * @param {Object} req
  * @param {Object} res
  */
-function getBirds(req, res) {
+function getRegions(req, res) {
 
-    birdService.getBirds()
-        .then(function(birds) {
-            res.send(birds);
+    regionService.getRegions()
+        .then(function(regions) {
+            res.send(regions);
         })
         .catch(function(error) {
             console.log(error);

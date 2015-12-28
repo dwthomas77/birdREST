@@ -11,10 +11,7 @@ var _ = require('lodash');
  *      id: 5,
  *      nameCommon: 'Northern Cardinal',
  *      nameScientific: 'Cardinalis cardinalis',
- *      family: 3,
- *      region: 7,
- *      habitat: 12,
- *      food: [3, 8, 11]
+ *      family: 3
  *   }
  * </pre>
  *
@@ -23,9 +20,6 @@ var _ = require('lodash');
  * @property {string}   nameCommon
  * @property {string}   nameScientific
  * @property {number}   family
- * @property {number}   region
- * @property {number}   habitat
- * @property {number[]} food
  */
 
 var Bird = function(birdReq) {
@@ -39,8 +33,37 @@ var Bird = function(birdReq) {
  * @property {string}   nameCommon
  * @property {string}   nameScientific
  * @property {string}   [family]
- * @property {string}   [region]
- * @property {string}   [habitat]
+ * @property {string[]} [regions]
+ * @property {string[]} [habitats]
+ * @property {string[]} [food]
+ */
+
+/**
+ * @typedef {Object} AssignmentExport
+ * @example
+ * <pre>
+ *      {
+ *          id: 2,
+ *          nameCommon: 'Northern Cardinal',
+ *          nameScientific: 'Cardinalis cardinalis',
+ *          family: 'CARD',
+ *          regions: [
+ *              'NENGL',
+ *              'MDATL'
+ *          ],
+ *          habitats: [
+ *              'WDLTHCKT',
+ *              'SBURBN'
+ *          ]
+ *      }
+ * </pre>
+ * @typedef {Object}    BirdReq
+ * @property {number}   id
+ * @property {string}   nameCommon
+ * @property {string}   nameScientific
+ * @property {string}   [family]
+ * @property {string[]} [regions]
+ * @property {string[]} [habitats]
  * @property {string[]} [food]
  */
 
